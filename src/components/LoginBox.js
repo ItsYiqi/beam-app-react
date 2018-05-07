@@ -1,7 +1,9 @@
 import React,{ Component } from 'react';
 import axios from 'axios';
+import superagent from 'superagent';
 import { Redirect } from 'react-router-dom';
 import WelcomePage from '../pages/WelcomePage';
+import qs from 'qs';
 
 export default class LoginBox extends Component{
     constructor(props){
@@ -32,43 +34,47 @@ export default class LoginBox extends Component{
     }
 
 
+
     submitForm(event){
       event.preventDefault();
 
       const url = 'http://localhost:3333/api/login';
+      // const user = {
+      //   'email': this.state.username,
+      //   'password': this.state.password
+      // };
       const user = {
-        'email': this.state.username,
-        'password': this.state.password
+        'email': 'nick.mitchell1@beamenergylabs.com',
+        'password': 'password'
       };
+
       axios.post(url, user)
       .then(function (response) {
-        console.log(response);
+        alert(response);
       })
       .catch(function (error) {
-        console.log(error);
+        alert(error);
       });
-
-      // const user = {
-      //   'email': 'nick.mitchell1@beamenergylabs.com',
-      //   'password': 'password'
-      // };
-      // const user = {
-      // 	"name": "yiqi",
-      // 	"email": "yiqiy1@student.unimelb.edu.au",
-      // 	"password": "1994yuyiqi",
-      // 	"admin": true
-      // };
-      // this.setState({
-      //   authenticated: true
-      // })
-
-
-      localStorage.setItem('token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZG1pbiI6dHJ1ZSwiaWF0IjoxNTI1NDkzNzY4LCJleHAiOjE1MjU1ODAxNjh9.WkOv7mzaX7SCusd3_dyTLFZS4upBj3gFKoE8nAA3wxg')
-      this.setState();
-
-
+      // localStorage.setItem('token', )
 
     }
+    
+    // componentDidMount(){
+    //   const user = {
+    //     'email': 'nick.mitchell1@beamenergylabs.com',
+    //     'password': 'password'
+    //   };
+    //   const url = 'http://localhost:3333/api/authenticate';
+    //
+    //   axios.post(url, user)
+    //   .then(function (response) {
+    //     alert(response);
+    //   })
+    //   .catch(function (error) {
+    //     alert(error);
+    //   });
+    //
+    // }
 
 
     render(){

@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import Navbar from '../components/NavBar';
+import LoginNavbar from '../components/LoginNavbar';
 import { Redirect } from 'react-router-dom';
 
 // only show the page when the user are authenticated
@@ -16,8 +16,16 @@ export default class WelcomePage extends Component{
       const isAlreadyAuthenticated = this.isAuthenticated();
       return(
         <div>
-          {!isAlreadyAuthenticated ? <Redirect to={{pathname: '/'}}/>: (
-            <h1> welcome home </h1>
+          {false ? <Redirect to={{pathname: '/'}}/>: (
+            <div>
+              <LoginNavbar />
+              <div className="container-box">
+                <h1>welcome</h1>
+                
+              </div>
+            </div>
+
+
           )}
         </div>
 

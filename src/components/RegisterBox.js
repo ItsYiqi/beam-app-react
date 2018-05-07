@@ -1,4 +1,5 @@
 import React,{ Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 let successRegister = false;
@@ -9,8 +10,8 @@ export default class RegisterBox extends Component{
         username: '',
         email: '',
         password: '',
-        admin: false,
-        authenticated: false
+        admin:false,
+        authenticated:false,
       }
     }
 
@@ -36,7 +37,7 @@ export default class RegisterBox extends Component{
     }
 
     isAuthenticated(){
-      return successRegister;
+      return this.state.authenticated;
     }
 
     submitForm(event){
@@ -50,9 +51,16 @@ export default class RegisterBox extends Component{
       };
 
       axios.post(url, newUser)
-      .then(function (response) {
+      .then(response =>{
         if(response.data.success){
-           successRegister = true;
+          alert('yes');
+          this.setState({
+            authenticated:true
+          });
+          this.context.router.push({
+            pathname: '/welcome',
+            state: {email: this.state.email}
+        })
         };
       })
       .catch(function (error) {
@@ -64,7 +72,14 @@ export default class RegisterBox extends Component{
 
 
     render(){
-      //console.log(this.state);
+      console.log(this.state);
+      const isAlreadyAuthenticated = this.isAuthenticated();
+      if (isAlreadyAuthenticated)
+        return (<Redirect to={{
+            pathname: '/welcome',
+            state: { referrer: this.state.email }
+        }} />)
+
       return(
         <div className="container">
             <div className="card card-container">
@@ -107,7 +122,6 @@ export default class RegisterBox extends Component{
                 </form>
             </div>
         </div>
-
       );
     }
 }

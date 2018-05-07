@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 
-export default class NavBar extends Component{
+export default class LoginNavbar extends Component{
     render(){
       return(
         <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -15,10 +15,7 @@ export default class NavBar extends Component{
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="/login">LOGIN</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link js-scroll-trigger" href="/register">REGISTER</a>
+                  <a className="nav-link js-scroll-trigger" href="/">Logout</a>
                 </li>
               </ul>
             </div>

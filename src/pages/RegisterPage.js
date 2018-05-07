@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import RegisterBox from '../components/RegisterBox';
-import Navbar from '../components/NavBar';
+import NavBar from '../components/NavBar';
 
 export default class RegisterPage extends Component{
     render(){
       return(
         <div>
-          <Navbar/>
-          <div>
-            <p>register</p>
-          </div>
-          <div className="container">
+          <NavBar />
+          <div className="container-box">
             <RegisterBox/>
           </div>
         </div>
