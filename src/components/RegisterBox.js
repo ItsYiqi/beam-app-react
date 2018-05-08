@@ -11,6 +11,7 @@ export default class RegisterBox extends Component{
         password: '',
         admin:false,
         authenticated:false,
+        error:false
       }
 
     }
@@ -41,6 +42,10 @@ export default class RegisterBox extends Component{
       return storage && storage.length>10;
     }
 
+    isError(){
+      return this.state.error;
+    }
+
     submitForm(event){
       event.preventDefault();
       const url = 'http://localhost:3333/register';
@@ -61,15 +66,27 @@ export default class RegisterBox extends Component{
             authenticated:true
           });
 
-        };
+        }else {
+          this.setState({
+            error: true
+          })
+        }
       })
       .catch(function (error) {
-        alert('try again!')
+        //alert('try again!')
+        this.setState({
+          error: true
+        })
       });
 
     }
 
     render(){
+      const error = this.isError();
+      const errortag = error? (
+        <div className="alert alert-danger" role="alert"> Oops..Try Again!</div>
+      ):(<div></div>);
+
       const isAlreadyAuthenticated = this.isAuthenticated();
       if (isAlreadyAuthenticated){
         console.log('hey');

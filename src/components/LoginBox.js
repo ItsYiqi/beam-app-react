@@ -9,6 +9,7 @@ export default class LoginBox extends Component{
         username: '',
         password: '',
         authenticated: false,
+        error: false
       }
     }
 
@@ -29,6 +30,9 @@ export default class LoginBox extends Component{
       return storage && storage.length>10;
     }
 
+    isError(){
+      return this.state.error;
+    }
 
 
     submitForm(event){
@@ -50,11 +54,14 @@ export default class LoginBox extends Component{
 
         }
         else{
-          alert('try again!');
+          //alert('try again!');
+          this.setState({
+            error: true
+          });
         }
       })
       .catch(function (error) {
-        alert('try again!')
+        //alert('try again!')
       });
 
     }
@@ -66,6 +73,11 @@ export default class LoginBox extends Component{
         return (<Redirect to={{
             pathname: '/welcome'
         }} />)
+
+      const error = this.isError();
+      const errortag = error? (
+        <div className="alert alert-danger" role="alert"> Oops..Try Again!</div>
+      ):(<div></div>);
 
       return(
             <div className="container">
@@ -96,6 +108,7 @@ export default class LoginBox extends Component{
                                 <input type="checkbox" value="remember-me" /> Remember me
                             </label>
                         </div>
+                        {errortag}
                         <button className="btn btn-lg btn-primary btn-block btn-signin" type="submit" >Sign in</button>
                     </form>
                     <a href="#" className="forgot-password">

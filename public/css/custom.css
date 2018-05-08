@@ -4,7 +4,9 @@
 /*
  * General styles
  */
-
+.alert.alert-danger{
+  font-size: 0.8rem;
+}
 
 body, html {
     height: auto;
