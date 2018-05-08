@@ -3,17 +3,7 @@ import LoginBox from '../components/LoginBox';
 import NavBar from '../components/NavBar';
 
 export default class LoginPage extends Component{
-    // componentWillMount() {
-    //   alert("This will mount");
-    // }
-    //
-    // componentDidMount() {
-    //   alert("This did mount");
-    // }
-    //
-    // componentWillUnmount() {
-    //   alert("This will unmount");
-    // }
+  
     render(){
       return(
         <div>

@@ -4,10 +4,11 @@ import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import WelcomePage from './pages/WelcomePage';
 import RegisterPage from './pages/RegisterPage';
-import './App.css';
 
 
 class App extends Component {
+
+
   render() {
     return (
       <div>
@@ -16,7 +17,7 @@ class App extends Component {
           <Route exact path="/" component={HomePage}/>
           <Route path="/login" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
-          <Route exact path='/welcome' component = {WelcomePage}/>
+          <Route path='/welcome' render={() => (<WelcomePage username = {sessionStorage.getItem('username')}/> )}/>
         </Switch>
       </Router>
     </div>

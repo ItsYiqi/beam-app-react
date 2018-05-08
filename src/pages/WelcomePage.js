@@ -6,29 +6,36 @@ import { Redirect } from 'react-router-dom';
 export default class WelcomePage extends Component{
     constructor(props){
       super(props);
+      this.state = {
+        redirect: false
+      }
     }
-    isAuthenticated(){
-     const token = localStorage.getItem('token')  ;
-     return token && token.length > 10;
+
+    componentWillMount(){
+      if(sessionStorage.getItem('token')){
+        console.log('success login to welcome page');
+      }else {
+        console.log('cant find token');
+        this.setState({
+          redirect: true
+        });
+      }
     }
+
 
     render(){
-      const isAlreadyAuthenticated = this.isAuthenticated();
+      if(this.state.redirect){
+          return (<Redirect to= {'/'}/>)
+      }
+
       return(
-        <div>
-          {false ? <Redirect to={{pathname: '/'}}/>: (
-            <div>
-              <LoginNavbar />
-              <div className="container-box">
-                <h1>welcome</h1>
-                
-              </div>
+          <div>
+            <LoginNavbar />
+            <div className="container-box">
+              <div className="container"></div>
+              <h1 className="welcome-user">WELCOME HOME ! {this.props.username}</h1>
             </div>
-
-
-          )}
-        </div>
-
+          </div>
       );
 
     }

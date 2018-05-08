@@ -6,6 +6,12 @@ export default class HomePage extends Component{
       return(
         <div>
           <NavBar/>
+          <div className="container-box">
+            <div className="container"></div>
+            <h1 className="welcome-user">
+              REACT APP BY YIQI :) 
+            </h1>
+          </div>
         </div>
 
       );

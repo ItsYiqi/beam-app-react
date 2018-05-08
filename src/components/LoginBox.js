@@ -1,9 +1,6 @@
 import React,{ Component } from 'react';
 import axios from 'axios';
-import superagent from 'superagent';
 import { Redirect } from 'react-router-dom';
-import WelcomePage from '../pages/WelcomePage';
-import qs from 'qs';
 
 export default class LoginBox extends Component{
     constructor(props){
@@ -11,7 +8,7 @@ export default class LoginBox extends Component{
       this.state = {
         username: '',
         password: '',
-        authenticated: false
+        authenticated: false,
       }
     }
 
@@ -28,61 +25,49 @@ export default class LoginBox extends Component{
     }
 
     isAuthenticated(){
-     const token = localStorage.getItem('token');
-     return token && token.length > 10;
-     // return this.state.authenticated;
+      const storage = sessionStorage.getItem('token');
+      return storage && storage.length>10;
     }
 
 
 
     submitForm(event){
       event.preventDefault();
-
       const url = 'http://localhost:3333/api/login';
-      // const user = {
-      //   'email': this.state.username,
-      //   'password': this.state.password
-      // };
       const user = {
-        'email': 'nick.mitchell1@beamenergylabs.com',
-        'password': 'password'
+        'email': this.state.username,
+        'password': this.state.password
       };
 
       axios.post(url, user)
-      .then(function (response) {
-        alert(response);
+      .then(response => {
+        if(response.data.success){
+          sessionStorage.setItem('token', response.data.token);
+          alert('login success!');
+          this.setState({
+            authenticated: true
+          })
+
+        }
+        else{
+          alert('try again!');
+        }
       })
       .catch(function (error) {
-        alert(error);
+        alert('try again!')
       });
-      // localStorage.setItem('token', )
 
     }
-    
-    // componentDidMount(){
-    //   const user = {
-    //     'email': 'nick.mitchell1@beamenergylabs.com',
-    //     'password': 'password'
-    //   };
-    //   const url = 'http://localhost:3333/api/authenticate';
-    //
-    //   axios.post(url, user)
-    //   .then(function (response) {
-    //     alert(response);
-    //   })
-    //   .catch(function (error) {
-    //     alert(error);
-    //   });
-    //
-    // }
-
 
     render(){
-      //console.log(this.state);
+
       const isAlreadyAuthenticated = this.isAuthenticated();
+      if (isAlreadyAuthenticated)
+        return (<Redirect to={{
+            pathname: '/welcome'
+        }} />)
+
       return(
-        <div>
-          {isAlreadyAuthenticated ? <Redirect to={{pathname: "/welcome"}}/>:(
             <div className="container">
                 <div className="card card-container">
                   <h5>LOGIN</h5>
@@ -118,8 +103,6 @@ export default class LoginBox extends Component{
                     </a>
                 </div>
             </div>
-          )}
-        </div>
       );
     };
 

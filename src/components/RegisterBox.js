@@ -2,7 +2,6 @@ import React,{ Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-let successRegister = false;
 export default class RegisterBox extends Component{
     constructor(props){
       super(props);
@@ -13,6 +12,7 @@ export default class RegisterBox extends Component{
         admin:false,
         authenticated:false,
       }
+
     }
 
     handleUsernameChanged(event){
@@ -37,7 +37,8 @@ export default class RegisterBox extends Component{
     }
 
     isAuthenticated(){
-      return this.state.authenticated;
+      const storage = sessionStorage.getItem('token');
+      return storage && storage.length>10;
     }
 
     submitForm(event){
@@ -49,36 +50,34 @@ export default class RegisterBox extends Component{
       	"password": this.state.password,
       	"admin": this.state.admin
       };
-
+      // post request to api to register new user
       axios.post(url, newUser)
-      .then(response =>{
+      .then(response => {
         if(response.data.success){
-          alert('yes');
+          sessionStorage.setItem('token','registertemptoken1234');
+          sessionStorage.setItem('username',this.state.username);
+          alert('register success!');
           this.setState({
             authenticated:true
           });
-          this.context.router.push({
-            pathname: '/welcome',
-            state: {email: this.state.email}
-        })
+
         };
       })
       .catch(function (error) {
-        console.log(error);
+        alert('try again!')
       });
 
     }
 
-
-
     render(){
-      console.log(this.state);
       const isAlreadyAuthenticated = this.isAuthenticated();
-      if (isAlreadyAuthenticated)
+      if (isAlreadyAuthenticated){
+        console.log('hey');
         return (<Redirect to={{
-            pathname: '/welcome',
-            state: { referrer: this.state.email }
+            pathname: '/welcome'
         }} />)
+
+      }
 
       return(
         <div className="container">
