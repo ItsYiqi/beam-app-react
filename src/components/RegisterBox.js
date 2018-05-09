@@ -46,6 +46,8 @@ export default class RegisterBox extends Component{
       return this.state.error;
     }
 
+
+
     submitForm(event){
       event.preventDefault();
       const url = 'http://localhost:3333/register';

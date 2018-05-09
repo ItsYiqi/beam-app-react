@@ -8,7 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 
 class App extends Component {
 
-
+  // identify routers to route to different pages
   render() {
     return (
       <div>

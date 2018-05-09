@@ -2,7 +2,9 @@ import React,{ Component } from 'react';
 import LoginNavbar from '../components/LoginNavbar';
 import { Redirect } from 'react-router-dom';
 
-// only show the page when the user are authenticated
+// ---------------------------------------------------------
+// Welcome Page, ('/welcome') only show when the user login or registered
+// ---------------------------------------------------------
 export default class WelcomePage extends Component{
     constructor(props){
       super(props);
@@ -11,6 +13,7 @@ export default class WelcomePage extends Component{
       }
     }
 
+    // Check the sessionStorage to authenticate user
     componentWillMount(){
       if(sessionStorage.getItem('token')){
         console.log('success login to welcome page');
@@ -24,6 +27,7 @@ export default class WelcomePage extends Component{
 
 
     render(){
+      // if not authenticated redirect to the HomePage
       if(this.state.redirect){
           return (<Redirect to= {'/'}/>)
       }

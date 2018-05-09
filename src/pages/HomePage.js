@@ -1,6 +1,9 @@
 import React,{ Component } from 'react';
 import NavBar from '../components/NavBar';
 
+// ---------------------------------------------------------
+// Home Page, ('/') 
+// ---------------------------------------------------------
 export default class HomePage extends Component{
     render(){
       return(
@@ -9,7 +12,7 @@ export default class HomePage extends Component{
           <div className="container-box">
             <div className="container"></div>
             <h1 className="welcome-user">
-              REACT APP BY YIQI :) 
+              REACT APP BY YIQI :)
             </h1>
           </div>
         </div>
