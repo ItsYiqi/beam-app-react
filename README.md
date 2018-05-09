@@ -20,3 +20,4 @@ Run: `yarn start` to run the app in the development mode, open [http://localhost
 
 ## Main Function
 - Enable the users to login and register by integrating with the backend service
+- Enable the users to logout
