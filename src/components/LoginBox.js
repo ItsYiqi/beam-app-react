@@ -2,7 +2,12 @@ import React,{ Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+
+// ------------------------------------------------
+// LOGIN Form Component : Handle user login request
+// ------------------------------------------------
 export default class LoginBox extends Component{
+    // this.state to store the user information
     constructor(props){
       super(props);
       this.state = {
@@ -13,28 +18,33 @@ export default class LoginBox extends Component{
       }
     }
 
+    // handle user input - username
     handleUsernameChanged(event){
       this.setState({
         username: event.target.value
       });
     }
 
+    // handle user input - password
     handlePasswordChanged(event){
       this.setState({
         password: event.target.value
       });
     }
 
+
+    // Authenticate user
     isAuthenticated(){
       const storage = sessionStorage.getItem('token');
       return storage && storage.length>10;
     }
 
+    // check if any error when login
     isError(){
       return this.state.error;
     }
 
-
+    // when click sign in button using axios to post login user detail
     submitForm(event){
       event.preventDefault();
       const url = 'http://localhost:3333/api/login';
@@ -43,6 +53,7 @@ export default class LoginBox extends Component{
         'password': this.state.password
       };
 
+      //POST request to api to authenticate user
       axios.post(url, user)
       .then(response => {
         if(response.data.success){
@@ -54,30 +65,31 @@ export default class LoginBox extends Component{
 
         }
         else{
-          //alert('try again!');
           this.setState({
             error: true
           });
         }
       })
       .catch(function (error) {
-        //alert('try again!')
       });
 
     }
 
-    render(){
 
+    render(){
+      // alert user if error login
+      const error = this.isError();
+      const errortag = error? (
+        <div className="alert alert-danger" role="alert"> Oops..Try Again!</div>
+      ):(<div></div>);
+
+      // if success authenticated redirect to welcome page
       const isAlreadyAuthenticated = this.isAuthenticated();
       if (isAlreadyAuthenticated)
         return (<Redirect to={{
             pathname: '/welcome'
         }} />)
 
-      const error = this.isError();
-      const errortag = error? (
-        <div className="alert alert-danger" role="alert"> Oops..Try Again!</div>
-      ):(<div></div>);
 
       return(
             <div className="container">

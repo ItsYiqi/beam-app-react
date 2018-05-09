@@ -4,9 +4,7 @@
 /*
  * General styles
  */
-.alert.alert-danger{
-  font-size: 0.8rem;
-}
+
 
 body, html {
     height: auto;
@@ -59,12 +57,7 @@ footer {
 .container-box{
   margin-top: 10%;
 }
-/* .nav-item{
-  font-family: "Rubik", sans-serif;
-}
-#welcomebeam{
-  font-family: "Rubik", sans-serif;
-} */
+
 .btn {
     font-weight: 700;
     height: 36px;
@@ -147,7 +140,7 @@ footer {
     /* background-color: linear-gradient(rgb(104, 145, 162), rgb(12, 97, 33));*/
     padding: 0px;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 0.9rem;
     height: 36px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -167,10 +160,15 @@ footer {
 
 .forgot-password {
     color: rgb(104, 145, 162);
+    font-size: 0.8rem;
 }
 
 .forgot-password:hover,
 .forgot-password:active,
 .forgot-password:focus{
     color: rgb(12, 97, 33);
+}
+
+.alert.alert-danger{
+  font-size: 0.8rem;
 }

@@ -2,7 +2,11 @@ import React,{ Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
+// -------------------------------------------------------
+// REGISTER Form Component : Handle new user register request
+// ---------------------------------------------------------
 export default class RegisterBox extends Component{
+    // this.state to store the user information
     constructor(props){
       super(props);
       this.state = {
@@ -16,38 +20,46 @@ export default class RegisterBox extends Component{
 
     }
 
+
+    // handle user input - username
     handleUsernameChanged(event){
       this.setState({
         username: event.target.value
       });
     }
+
+    // handle user input - email
     handleEmailChanged(event){
       this.setState({
         email: event.target.value
       });
     }
+    // handle user input - password
     handlePasswordChanged(event){
       this.setState({
         password: event.target.value
       });
     }
+
+    // handle user input - admin
     handleAdminChanged(event){
       this.setState({
         admin: !this.state.admin
       });
     }
 
+    // Authenticate user and check errors
     isAuthenticated(){
       const storage = sessionStorage.getItem('token');
       return storage && storage.length>10;
     }
 
+    // check if any error when login
     isError(){
       return this.state.error;
     }
 
-
-
+  // when click sign in button using axios to post login user detail
     submitForm(event){
       event.preventDefault();
       const url = 'http://localhost:3333/register';
@@ -57,7 +69,7 @@ export default class RegisterBox extends Component{
       	"password": this.state.password,
       	"admin": this.state.admin
       };
-      // post request to api to register new user
+      // POST request to api to register new user
       axios.post(url, newUser)
       .then(response => {
         if(response.data.success){
@@ -75,7 +87,6 @@ export default class RegisterBox extends Component{
         }
       })
       .catch(function (error) {
-        //alert('try again!')
         this.setState({
           error: true
         })
@@ -84,11 +95,13 @@ export default class RegisterBox extends Component{
     }
 
     render(){
+      // alert user if error register
       const error = this.isError();
       const errortag = error? (
         <div className="alert alert-danger" role="alert"> Oops..Try Again!</div>
       ):(<div></div>);
 
+      // if success authenticated redirect to welcome page
       const isAlreadyAuthenticated = this.isAuthenticated();
       if (isAlreadyAuthenticated){
         console.log('hey');

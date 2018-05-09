@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import NavBar from '../components/NavBar';
 
 // ---------------------------------------------------------
-// Home Page, ('/') 
+// Home Page, ('/')
 // ---------------------------------------------------------
 export default class HomePage extends Component{
     render(){
